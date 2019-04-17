@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+  <!-- required meta tags-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width-device-width, intial-scale=1,shrink-to-fit=no">
+    
+  <title>Fish Bowl</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background: #262626;
+        }
+        
+    /*   outline of bowl    */    
+        .bowl{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border: 4px solid #fff;
+            transform-origin: bottom center;
+            animation: bowl 5s linear infinite;
+            animation-play-state: paused;
+            margin-bottom: 200px;
+        } 
+        
+    /*   upper circle of bowl    */  
+        .bowl:before {
+            content: ' ';
+            position: absolute;
+            top:-10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 30px;
+            background:#fff ;
+            border-radius: 50%;
+            border: 4px solid #fff; 
+        }
+        
+    /*   inside circle of bowl    */  
+        .bowl:after {
+            content: ' ';
+            position: absolute;
+            top:30%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 150px;
+            height: 80px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        
+    /*  @keyframes for animation of bowl   */
+        @keyframes bowl{
+            0%{
+                transform: translate(-50%,-50%) rotate(0deg);
+            }
+            25%{
+                transform: translate(-50%,-50%) rotate(15deg);
+            }
+            50%{
+                transform: translate(-50%,-50%) rotate(0deg);
+            }
+            75%{
+                transform: translate(-50%,-50%) rotate(-15deg);
+            }
+            100%{
+                transform: translate(-50%,-50%) rotate(0deg);
+            }
+        }
+
+        
+    /*   water    */  
+        .water{
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            background: rgba(65,193,251,0.5);
+            border-bottom-right-radius: 150px;
+            border-bottom-left-radius: 150px;
+            transform-origin: top center;
+            animation: water 5s linear infinite;
+            animation-play-state: paused;
+        }
+        
+    /* circle as surfsce  of water    */  
+        .water:before{
+            content: ' ';
+            position: absolute;
+            top:-10px;
+            left:0;
+            width: 100%;
+            height: 20px;
+            background: #1fa4e0;
+            border-radius: 50%;
+        }
+         
+    /*  @keyframes for animation of water   */
+               @keyframes water{
+            0%{
+                transform: rotate(0deg);
+            }
+            25%{
+                transform: rotate(10deg);
+            }
+            50%{
+                transform: rotate(0deg);
+            }
+            75%{
+                transform: rotate(-10deg);
+            }
+            100%{
+                transform: rotate(0deg);
+            }
+        }
+        
+    /* fish */
+        img.fish{
+            width: 100px;
+            animation: fishh 5s linear infinite;
+            animation-play-state: paused;
+        }
+        
+    /*  @keyframes for animation of fish   */
+        @keyframes fishh{
+            0%{
+                transform: translate(0,0) rotateY(180deg);
+            }
+            50%{
+                transform: translate(180px,0) rotateY(180deg);
+            }
+            51%{
+                transform: translate(180px,0) rotateY(0deg);
+            }
+            100%{
+                transform: translate(0,0) rotateY(0deg);
+            }
+        }
+        
+        /*    toggle   switch      */
+
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+     
+    /*   background of toggle    */
+.slider {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 160px;
+	height: 70px;
+	background: grey;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+    margin-top: 520px;
+}
+
+        /*   toggle circle    */
+.slider:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 60px;
+	height: 60px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+       /*   background after checked    */
+input:checked + .slider {
+	background: orange;
+}
+
+        /*   toggle circle animation    */
+input:checked + .slider:after {
+	left: calc(100% - 17px);
+	transform: translateX(-80%);
+}
+        
+        /*   lable-width    */
+label:active:after {
+	width: 130px;
+}
+
+        /*   centering the toggle switch    */
+// centering
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+    </style>
+    
+<!-- javascript -->    
+    
+    <script> 
+document.addEventListener('DOMContentLoaded', function () {
+  var checkbox = document.querySelector('input[type="checkbox"]');
+
+  checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+    document.getElementById("bowl1").style.animationPlayState = "running";
+    document.getElementById("bowl2").style.animationPlayState = "running";
+    document.getElementById("bowl3").style.animationPlayState = "running";
+    } else {
+      document.getElementById("bowl1").style.animationPlayState = "paused";
+      document.getElementById("bowl2").style.animationPlayState = "paused";
+      document.getElementById("bowl3").style.animationPlayState = "paused";
+    }
+  });
+});
+    </script>
+    </head>
+<body>
+  <div class="bowl" id="bowl1" > 
+    <div class="water" id="bowl2">
+        <img alt="fish" src="fish.png" class="fish" id="bowl3">
+      </div></div>
+    <div style="margin-left: 610px;">
+    <label class="switch">
+  <input type="checkbox">
+  <div class="slider"></div>
+</label>
+        </div>
+    </body>
+</html>
